@@ -15,6 +15,16 @@ Quick setup guide to get a running Linux system.
     yay spotify
     ```
 
+## Preliminary customization notes
+
+### Customize logout menu ([wlogout](https://github.com/ArtsyMacaw/wlogout))
+
+Change the logout screen by editing files in `/home/<USER>/.config/wlogout`. Use for instance [_catppuccin_](https://github.com/catppuccin/wlogout). Follow the readme for easy installation.
+
+### Wallpapers
+
+With [JaKooLit dotfiles](https://github.com/JaKooLit/Hyprland-Dots), wallpapers can be found in `/home/<USER>/Pictures/wallpapers`. Maybe use wallpapers from [`/wallpapers`](/wallpapers/).
+
 ## Browser stuff
 
 1) Install [uBlock](https://ublockorigin.com/)
