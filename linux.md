@@ -17,6 +17,16 @@ Quick setup guide to get a running Linux system.
 
 ## Preliminary customization notes
 
+### Disable focus on hover
+
+Add this somewhere in the hyprland config (e.g. `~/.config/hyprland/hyprland.conf`
+
+```
+input {
+    follow_mouse = 2
+}
+```
+
 ### Customize logout menu ([wlogout](https://github.com/ArtsyMacaw/wlogout))
 
 Change the logout screen by editing files in `/home/<USER>/.config/wlogout`. Use for instance [_catppuccin_](https://github.com/catppuccin/wlogout). Follow the readme for easy installation.
