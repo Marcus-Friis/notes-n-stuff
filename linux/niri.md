@@ -11,7 +11,7 @@ yay dms-shell-bin
 systemctl --user add-wants niri.service dms
 ```
 
-Additional programs that niri has default keybindings to
+Additional programs that niri has default keybindings to. niri uses _alacritty_ as the terminal (*`Mod+T`*), and *fuzzel* as the application launcher (*`Mod+D`*) by default
 ```
 sudo pacman -S alacritty  # terminal
 sudo pacman -S fuzzel     # application launcher
@@ -23,10 +23,7 @@ Edit the config in `~/.config/niri/config.kdl`.
 
 Some nice settings to configure are
 
-**Install default apps**
-By default, niri uses _alacritty_ as the terminal (*`Mod+T`*), and 
-
-**Disable mouse acceleration:**
+**Disable mouse acceleration**
 In the config file, find the `mouse` section, and set `accel-profile` to `flat` 
 ```
 mouse {
@@ -67,6 +64,14 @@ Add this to `binds`
 	Mod+B hotkey-overlay-title="Open a Browser: Firefox" { spawn "firefox"; }
 ```
 
+**Custom window rules**
+Steam floating friends by default
+```
+window-rule {
+    match app-id=r#"steam"# title="^Friends List$"
+    open-floating true
+}
+```
 ## niriswitcher
 
 If missing alt+tab, try [niriswitcher](https://github.com/isaksamsten/niriswitcher). Install using
