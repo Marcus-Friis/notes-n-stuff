@@ -27,11 +27,14 @@ Quick setup guide to get a running Linux system.
 		```
 	4) Logout and login again, or if that does not work, reboot. 
 4) Install [[walker]] for spotlight search
-5) Install other desktop environments if you want e.g. [[hyprland]]
+5) Install other desktop environments if you want e.g. [[hyprland]] or [[niri]]
 ## Browser stuff
 
 1) Install firefox
 2) Install [uBlock](https://ublockorigin.com/)
+
+https://redditenhancementsuite.com/
+https://addons.mozilla.org/en-US/firefox/addon/old-reddit-redirect/
 
 Or try [Zen](https://zen-browser.app/).
 
