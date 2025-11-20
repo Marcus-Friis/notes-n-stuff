@@ -1,4 +1,6 @@
-# Linux Setup 
+# Linux
+
+## Setup
 
 Quick setup guide to get a running Linux system. 
 
@@ -11,24 +13,8 @@ Quick setup guide to get a running Linux system.
     yay discord
     yay spotify
     ```
-3) To apply my a good default theme do
-	1) Install [`konsave`](https://github.com/Prayag2/konsave)
-		```sh
-		yay konsave
-		```
-	2) Use command
-		```sh
-		konsave -i <path to file>
-		```
-	3)  Apply the theme with
-		```sh
-		konsave -l  # indetify the profile name
-		konsave -a <profile name
-		```
-	4) Logout and login again, or if that does not work, reboot. 
-4) Install [[walker]] for spotlight search
-5) Install other desktop environments if you want e.g. [[hyprland]] or [[niri]]
-## Browser stuff
+3) Install/configure desktop environments or window managers if you want e.g. [[plasma]], [[gnome]], [[mangowc]] [[niri]],  [[hyprland]]  
+### Browser stuff
 
 1) Install firefox
 2) Install [uBlock](https://ublockorigin.com/)
@@ -38,13 +24,27 @@ https://addons.mozilla.org/en-US/firefox/addon/old-reddit-redirect/
 
 Or try [Zen](https://zen-browser.app/).
 
-## Non Steam games
+### Non Steam games
 
-### Hearthstone
+#### Hearthstone
 
 1) Install [Lutris](https://lutris.net/)
 
-### Rocket Leauge
+#### Rocket Leauge
 
 1) Install [Heroic Games Launcher](https://github.com/Heroic-Games-Launcher/HeroicGamesLauncher)
 
+
+## Useful Commands
+
+### `systemctl`
+
+example for *dms*
+
+```
+systemctl --user status dms  # check status
+systemctl --user stop dms    # stop service
+systemctl --user disable dms # disable automatic startup
+```
+
+The `--user` flag tells `systemctl` to communicate with the **per-user instance** of the `systemd` service manager for the current user, rather than the default **system-wide instance**.

@@ -2,7 +2,7 @@
 
 > A scrollable-tiling Wayland compositor. - [niri](https://github.com/YaLTeR/niri)
 
-Read the [Arch docs](https://wiki.archlinux.org/title/Niri) for a better understanding of niri and its dependencies.
+Read the [Arch docs](https://wiki.archlinux.org/title/Niri) for a better understanding of niri and its dependencies, or check out this [youtube tutorial](https://www.youtube.com/watch?v=bjalAgAVIkc).
 
 Quick install with
 ```
@@ -71,6 +71,12 @@ window-rule {
     match app-id=r#"steam"# title="^Friends List$"
     open-floating true
 }
+```
+
+**Remove window decorators**
+Remove window decorators using the command
+```
+prefer-no-csd
 ```
 ## niriswitcher
 
