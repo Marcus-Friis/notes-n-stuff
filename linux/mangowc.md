@@ -24,6 +24,20 @@ Set danish keyboard layout
 xkb_rules_layout=dk
 ```
 
+**Monitor rules**
+[docs](https://github.com/DreamMaoMao/mangowc/wiki#monitor-rules).
+`monitorrule` - name,mfact,nmaster,layout,transform,scale,x,y,width,height,refreshrate|
+```cfg
+monitorrule=DP-2,0.55,1,tile,0,1,0,0,3440,1440,144
+monitorrule=DP-3,0.55,1,tile,0,1,3440,200,1920,1080,60
+```
+
+**Decrease mouse speed**
+```cfg
+accel_speed=-0.5
+accel_profile=0
+```
+
 **Keybindings**
 Alter the default keybindings in the config file
 ```cfg
