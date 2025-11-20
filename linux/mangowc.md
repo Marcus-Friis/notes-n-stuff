@@ -13,3 +13,33 @@ Then install the required dependencies:
 ```sh
 sudo pacman -Sy foot wl-clipboard wmenu grim slurp swaybg firefox ttf-jetbrains-mono-nerd
 ```
+
+## Config
+
+Create the `~/.config/mango/config.conf` if it does not already exist. Use [this official template](https://github.com/DreamMaoMao/mangowc/blob/main/config.conf).
+
+**Keyboard layout**
+Set danish keyboard layout
+```cfg
+xkb_rules_layout=dk
+```
+
+**Keybindings**
+Alter the default keybindings in the config file
+```cfg
+bind=SUPER,Return,spawn,foot
+bind=SUPER,q,killclient,
+bind=SUPER,d,spawn,wmenu-run -l 10
+```
+
+**Create `autostart.sh` and run on startup**
+Create a script for stuff that should start e.g. `noctalia-shell`  or `swaybg`
+```sh
+qs -c ~/.config/quickshell/noctalia-shell/ >/dev/null 2>&1 &  
+swaybg -i ~/Desktop/notes-n-stuff/linux/wallpapers/andreas-oberdammer-agMGQamWpzQ-unsplash.jpg >/dev/null 2>&1 &
+```
+### Noctalia-shell
+
+> A sleek and minimal desktop shell thoughtfully crafted for Wayland. - [noctalia-shell](https://github.com/noctalia-dev/noctalia-shell) 
+
+Install with [this guide](https://docs.noctalia.dev/getting-started/installation/). 

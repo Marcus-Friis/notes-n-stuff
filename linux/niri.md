@@ -62,6 +62,7 @@ Add this to `binds`
 	// custom binds
 	Mod+E hotkey-overlay-title="Open a File explorer: Dolphin" { spawn "dolphin"; }
 	Mod+B hotkey-overlay-title="Open a Browser: Firefox" { spawn "firefox"; }
+	Mod+S { screenshot; }
 ```
 
 **Custom window rules**

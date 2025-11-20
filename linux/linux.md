@@ -13,7 +13,7 @@ Quick setup guide to get a running Linux system.
     yay discord
     yay spotify
     ```
-3) Install/configure desktop environments or window managers if you want e.g. [[plasma]], [[gnome]], [[mangowc]] [[niri]],  [[hyprland]]  
+3) Install/configure desktop environments or window managers if you want e.g. [[plasma]], [[gnome]], [[niri]], [[mangowc]], [[hyprland]]  
 ### Browser stuff
 
 1) Install firefox
