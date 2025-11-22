@@ -7,8 +7,6 @@ Read the [Arch docs](https://wiki.archlinux.org/title/Niri) for a better underst
 Quick install with
 ```
 sudo pacman -Syu niri xwayland-satellite xdg-desktop-portal-gnome xdg-desktop-portal-gtk
-yay dms-shell-bin
-systemctl --user add-wants niri.service dms
 ```
 
 Additional programs that niri has default keybindings to. niri uses _alacritty_ as the terminal (*`Mod+T`*), and *fuzzel* as the application launcher (*`Mod+D`*) by default
@@ -79,6 +77,16 @@ Remove window decorators using the command
 ```
 prefer-no-csd
 ```
+
+**Add background**
+If no *dms*, add backgrounds using [*swaybg*](https://github.com/swaywm/swaybg)
+```
+swaybg -i /YOUR/BACKGROUND/PATH >/dev/null 3>&1 &
+```
+Add this to the config as such
+```cfg
+spawn-sh-at-startup "swaybg -i ~/walls/wall1.png"
+```
 ## niriswitcher
 
 If missing alt+tab, try [niriswitcher](https://github.com/isaksamsten/niriswitcher). Install using
@@ -101,4 +109,12 @@ And add `spawn-at-startup`
 
 ```
 spawn-at-startup "niriswitcher"
+```
+
+## DankMaterialShell
+
+Add [dms](https://github.com/AvengeMedia/DankMaterialShell) to niri with these commands
+```sh
+yay dms-shell-bin  # install dms
+systemctl --user add-wants niri.service dms  # add symlink from niri to dms
 ```
