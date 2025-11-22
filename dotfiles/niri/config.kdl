@@ -238,7 +238,7 @@ binds {
     Mod+B hotkey-overlay-title="Open a Browser: Firefox" { spawn "firefox"; }
     Mod+D hotkey-overlay-title="Run an Application: fuzzel" { spawn "fuzzel"; }
     Mod+S { screenshot; }
-    Mod+Return hotkey-overlay-title="Open Terminal" { spawn "ghostty"; }
+    Mod+Return hotkey-overlay-title="Open Terminal" { spawn "alacritty"; }
 
     XF86AudioPrev {
 	spawn "dms" "ipc" "call" "mpris" "previous";
