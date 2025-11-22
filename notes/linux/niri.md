@@ -15,11 +15,16 @@ sudo pacman -S alacritty  # terminal
 sudo pacman -S fuzzel     # application launcher
 ```
 
+Alternatively, niri can be installed using [DankMaterialShell](https://github.com/AvengeMedia/DankMaterialShell)  as:
+```sh
+curl -fsSL https://install.danklinux.com | sh
+```
+
 ## Config
 
 Edit the config in `~/.config/niri/config.kdl`.
 
-Some nice settings to configure are
+Use the config from the *dotfiles*. Otherwise, here are various nice settings to pick, choose and be inspired from
 
 **Disable mouse acceleration**
 In the config file, find the `mouse` section, and set `accel-profile` to `flat` 
@@ -78,7 +83,29 @@ Remove window decorators using the command
 prefer-no-csd
 ```
 
-**Add background**
+**Auto start services**
+Run these on startup
+```cfg
+spawn-at-startup "bash" "-c" "wl-paste --watch cliphist store &"
+spawn-at-startup "dms" "run"
+spawn-at-startup "/usr/lib/mate-polkit/polkit-mate-authentication-agent-1"
+```
+
+**dms toggle play, previous and next audio bindings**
+Make keyboard audio keys work with this
+```cfg
+XF86AudioPrev {
+	spawn "dms" "ipc" "call" "mpris" "previous";
+}
+XF86AudioPlay {
+        spawn "dms" "ipc" "call" "mpris" "playPause";
+}
+XF86AudioNext {
+	spawn "dms" "ipc" "call" "mpris" "next";
+}
+```
+
+**Add wallpaper**
 If no *dms*, add backgrounds using [*swaybg*](https://github.com/swaywm/swaybg)
 ```
 swaybg -i /YOUR/BACKGROUND/PATH >/dev/null 3>&1 &
@@ -87,6 +114,7 @@ Add this to the config as such
 ```cfg
 spawn-sh-at-startup "swaybg -i ~/walls/wall1.png"
 ```
+
 ## niriswitcher
 
 If missing alt+tab, try [niriswitcher](https://github.com/isaksamsten/niriswitcher). Install using
@@ -113,8 +141,12 @@ spawn-at-startup "niriswitcher"
 
 ## DankMaterialShell
 
-Add [dms](https://github.com/AvengeMedia/DankMaterialShell) to niri with these commands
+Install [dms](https://github.com/AvengeMedia/DankMaterialShell)
 ```sh
 yay dms-shell-bin  # install dms
-systemctl --user add-wants niri.service dms  # add symlink from niri to dms
+```
+
+Auto start it with niri
+```cfg
+spawn-at-startup "dms" "run"
 ```

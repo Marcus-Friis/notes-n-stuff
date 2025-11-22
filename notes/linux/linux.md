@@ -7,11 +7,12 @@ Quick setup guide to get a running Linux system.
 1) Install [EndeveourOS](https://endeavouros.com/)
     - Alternatively, try [Nobara](https://nobaraproject.org/), [CachyOS](https://cachyos.org/), or pure [Arch](https://archlinux.org/) if you're feeling brave.
     - Note that it may be laggy the first couple of boots, but becomes normal after a while. `¯\_(ツ)_/¯`
-2) Install basic software
+2) Install basic software (use `yay` or `sudo pacman -S PACKAGE-NAME`)
     ```sh
     yay steam
     yay discord
-    yay spotify
+    sudo pacman -S spotify-launcher
+    yay obsidian
     ```
 3) Install/configure desktop environments or window managers if you want e.g. [[plasma]], [[gnome]], [[niri]], [[mangowc]], [[hyprland]]  
 ### Browser stuff
