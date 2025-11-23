@@ -5,33 +5,14 @@
 config-notification {
     disable-failed
 }
-// Outputs from existing configuration
-output "DP-2" {
-    mode "3440x1440@144.000"
-    scale 1
-    transform "normal"
-    position x=0 y=-200
-}
-output "DP-3" {
-    mode "1920x1080@60.000"
-    scale 1
-    transform "normal"
-}
-
-
-gestures {
-    hot-corners {
-        off
-    }
-}
 
 // Input device configuration.
 // Find the full list of options on the wiki:
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Input
 input {
     keyboard {
-        xkb {
-        }
+	repeat-delay 200
+        repeat-rate 35
         numlock
     }
     touchpad {
@@ -48,6 +29,17 @@ input {
 // Find more information on the wiki:
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Outputs
 // Remember to uncomment the node by removing "/-"!
+output "DP-2" {
+    mode "3440x1440@144.000"
+    scale 1
+    transform "normal"
+    position x=0 y=-200
+}
+output "DP-3" {
+    mode "1920x1080@60.000"
+    scale 1
+    transform "normal"
+}
 
 // Settings that influence how windows are positioned and sized.
 // Find more information on the wiki:
@@ -428,7 +420,7 @@ binds {
 
     // === Manual Sizing ===
     Mod+Minus { set-column-width "-10%"; }
-    Mod+Equal { set-column-width "+10%"; }
+    Mod+Plus { set-column-width "+10%"; }
     Mod+Shift+Minus { set-window-height "-10%"; }
     Mod+Shift+Equal { set-window-height "+10%"; }
 

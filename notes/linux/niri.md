@@ -105,6 +105,16 @@ XF86AudioNext {
 }
 ```
 
+**Improve keyboard responsiveness**
+Lower the repeat delay to make scrolling with keyboard and such more responsive. 
+```cfg
+// in the input {} section, add
+keyboard {
+	repeat-delay 200
+	repeat-rate 35
+}
+```
+
 **Add wallpaper**
 If no *dms*, add backgrounds using [*swaybg*](https://github.com/swaywm/swaybg)
 ```
