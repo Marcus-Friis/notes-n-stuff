@@ -3,8 +3,10 @@ local function newBall(x, y, radius)
 	ball.x = x or 420
 	ball.y = y or 420
 	ball.radius = radius or 32
-	ball.vx = 100
+	ball.vx = 400
 	ball.vy = 0
+	ball.iterator = 0
+	ball.ballFunction = nil
 
 	function ball:draw()
 		love.graphics.circle("line", ball.x, ball.y, ball.radius)
@@ -12,7 +14,15 @@ local function newBall(x, y, radius)
 
 	function ball:update(dt)
 		ball.x = ball.x + (ball.vx * dt)
-		ball.y = ball.y + (ball.vy * dt)
+		if ball.ballFunction then
+			ball.y = ball.y + ball.ballFunction(ball.iterator)
+		end
+		ball.iterator = ball.iterator + dt
+	end
+
+	function ball:setFunction(func)
+		ball.ballFunction = func
+		ball.iterator = 0
 	end
 
 	return ball
