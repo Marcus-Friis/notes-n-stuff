@@ -17,7 +17,8 @@ local function newBall(x, y, radius)
 	function ball:update(dt)
 		ball.x = ball.x + (ball.vx * dt)
 		if ball.ballFunction then
-			ball.y = ball.y + ball.ballFunction(ball.iterator) * ball.yCoef
+			-- ball.y = ball.y + ball.ballFunction(ball.iterator) * ball.yCoef
+			ball.y = ball.ballFunction(ball.iterator) * ball.yCoef
 		end
 		ball.iterator = ball.iterator + dt
 
@@ -33,6 +34,10 @@ local function newBall(x, y, radius)
 			ball.y = ball.radius -- clamp
 			ball.yCoef = -ball.yCoef -- invert
 		end
+	end
+
+	function ball:invertXDirection()
+		self.vx = self.vx * -1
 	end
 
 	function ball:setFunction(func)

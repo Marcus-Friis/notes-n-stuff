@@ -5,6 +5,7 @@ local utf8 = require("utf8")
 -- state
 mathOverlay.isActive = false
 mathOverlay.input = ""
+mathOverlay.submit = false
 
 function mathOverlay:displayOverlay()
 	-- only display overlay when toggled
@@ -48,19 +49,68 @@ function mathOverlay:keypressed(key)
 			self.input = ""
 		end
 	elseif key == "return" or key == "kpenter" then
-		-- Accept / evaluate final expression — we already show live result; you could clear input or keep it
-		-- For this example, we'll keep input but maybe flash cursor
-		-- Optionally, you can move input to history later.
+		self.submit = true
+		self:toggle()
+		print(self.input)
+		return true
 	elseif key == "escape" then
-		-- optional: clear input
 		self.input = ""
 	elseif key == "v" and (love.keyboard.isDown("lctrl") or love.keyboard.isDown("rctrl")) then
-		-- paste from clipboard (if Love2D supports it)
+		-- paste from clipboard
 		local ok, clip = pcall(love.system.getClipboardText)
 		if ok and clip then
 			self.input = self.input .. tostring(clip)
 		end
 	end
+	return false
+end
+
+function mathOverlay:interpretFunction(inputStr)
+	if not inputStr or inputStr == "" then
+		return function()
+			return 0
+		end
+	end
+
+	local expr = inputStr
+
+	-- Fix implicit multiplication:
+	expr = expr:gsub("(%d)(%a)", "%1*%2") -- 3x → 3*x
+	expr = expr:gsub("(%a)(%d)", "%1*%2") -- x3 → x*3   (but don't touch hex etc.)
+	expr = expr:gsub("%)(%a)", ")*%1") -- )x → )*x
+	expr = expr:gsub("(%a)%(", "%1*(") -- x( → x*(
+	expr = expr:gsub("%)(%d)", ")*%1") -- )3 → )* 3
+
+	local functions = { "sin", "cos", "tan", "asin", "acos", "atan", "log", "log10", "sqrt", "abs", "exp" } -- Replace math functions with math.* form
+
+	for _, fn in ipairs(functions) do
+		expr = expr:gsub(fn .. "%(", "math." .. fn .. "(")
+	end
+
+	-- Replace ^ with Lua’s exponent operator **
+	expr = expr:gsub("%^", "**")
+
+	-- Now wrap this into a Lua function string
+	local chunk = "return function(x) return " .. expr .. " end"
+
+	local f, err = load(chunk)
+	if not f then
+		print("Error loading function:", err)
+		return function()
+			return 0
+		end
+	end
+
+	-- Run the chunk → returns the actual function
+	local ok, mathFunc = pcall(f)
+	if not ok then
+		print("Error executing function:", mathFunc)
+		return function()
+			return 0
+		end
+	end
+
+	return mathFunc
 end
 
 function mathOverlay:toggle()

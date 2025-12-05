@@ -37,13 +37,19 @@ function love.update(dt)
 	if not mathOverlay.isActive then
 		for _, p in ipairs(Players) do
 			p:update(dt)
-			hasCollision = utils.playerBallCollision(p, Ball)
+			hasCollision = p:ballCollision(Ball)
 			collisionFlag = collisionFlag or hasCollision
 		end
 		Ball:update(dt)
 		if hasCollision then
 			print("Hit!")
-			-- mathOverlay:toggle()
+			mathOverlay:toggle()
+		end
+	else
+		if mathOverlay.submit then
+			local mathFunc = mathOverlay:interpretFunction(mathOverlay.input)
+			Ball:setFunction(mathFunc)
+			mathOverlay.submit = false
 		end
 	end
 end
@@ -60,11 +66,5 @@ function love.textinput(t)
 end
 
 function love.keypressed(key, scancode, isrepeat)
-	-- toggle overlay with TAB
-	if key == "tab" then
-		mathOverlay:toggle()
-		return
-	end
-
 	mathOverlay:keypressed(key)
 end
