@@ -2,8 +2,13 @@
 
 function love.load()
 	mathOverlay = require("mathoverlay")
+	mathOverlay:load()
 	utils = require("utils")
 	BallFunctions = require("functions")
+
+	-- game state vars
+	GameState = "playing" -- playing|mathing|paused
+	ShootingPlayer = nil -- track which player is actively shooting
 
 	-- window data
 	local windowWidth, windowHeight = love.graphics.getDimensions()
@@ -34,22 +39,26 @@ function love.update(dt)
 	local collisionFlag = false
 	local hasCollision = false
 
-	if not mathOverlay.isActive then
+	if GameState == "playing" then
+		Ball:update(dt)
 		for _, p in ipairs(Players) do
 			p:update(dt)
 			hasCollision = p:ballCollision(Ball)
+			ShootingPlayer = p
 			collisionFlag = collisionFlag or hasCollision
 		end
-		Ball:update(dt)
-		if hasCollision then
+		if collisionFlag then
 			print("Hit!")
 			mathOverlay:toggle()
+			GameState = "mathing"
 		end
-	else
+	elseif GameState == "mathing" then
+		mathOverlay:update(dt)
 		if mathOverlay.submit then
-			local mathFunc = mathOverlay:interpretFunction(mathOverlay.input)
-			Ball:setFunction(mathFunc)
+			local mathFunc = mathOverlay:interpretFunction()
+			ShootingPlayer:shoot(Ball, mathFunc)
 			mathOverlay.submit = false
+			GameState = "playing"
 		end
 	end
 end
@@ -62,9 +71,13 @@ function love.draw()
 end
 
 function love.textinput(t)
-	mathOverlay:textinput(t)
+	if mathOverlay.isActive then
+		mathOverlay:textinput(t)
+	end
 end
 
 function love.keypressed(key, scancode, isrepeat)
-	mathOverlay:keypressed(key)
+	if mathOverlay.isActive then
+		mathOverlay:keypressed(key)
+	end
 end

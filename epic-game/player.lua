@@ -39,15 +39,19 @@ local function newPlayer(x, y, width, height)
 				ball.x = self.x + self.width + ball.radius
 			end
 
-			-- Reverse X direction
-			ball:invertXDirection()
-
-			-- assign a function the y movement
-			-- local func = utils.getRandomFunction()
-			-- ball:setFunction(func)
 			return true
 		end
 		return false
+	end
+
+	function player:shoot(ball, shooterFunc)
+		-- Reverse X direction
+		ball:invertXDirection()
+
+		-- assign a function the y movement
+		ball:setFunction(shooterFunc)
+		-- local func = utils.getRandomFunction()
+		-- ball:setFunction(func)
 	end
 
 	return player

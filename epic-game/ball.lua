@@ -3,10 +3,10 @@ local function newBall(x, y, radius)
 	ball.x = x or 420
 	ball.y = y or 420
 	ball.radius = radius or 32
-	ball.vx = 400
+	ball.vx = 200
 	ball.vy = 0
 	ball.yCoef = 1
-	ball.iterator = 0
+	ball.functionX = 0
 	ball.ballFunction = nil
 	local _, windowHeight = love.graphics.getDimensions()
 
@@ -17,10 +17,9 @@ local function newBall(x, y, radius)
 	function ball:update(dt)
 		ball.x = ball.x + (ball.vx * dt)
 		if ball.ballFunction then
-			-- ball.y = ball.y + ball.ballFunction(ball.iterator) * ball.yCoef
-			ball.y = ball.ballFunction(ball.iterator) * ball.yCoef
+			ball.y = ball.ballFunction(ball.functionX) * ball.yCoef
 		end
-		ball.iterator = ball.iterator + dt
+		ball.functionX = ball.functionX + (ball.vx * dt)
 
 		-- if ball exits game window, do stuff
 		-- bottom boundary
@@ -42,7 +41,7 @@ local function newBall(x, y, radius)
 
 	function ball:setFunction(func)
 		ball.ballFunction = func
-		ball.iterator = 0
+		ball.functionX = 0
 	end
 
 	return ball
