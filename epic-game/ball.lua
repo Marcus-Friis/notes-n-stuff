@@ -3,7 +3,7 @@ local function newBall(x, y, radius)
 	ball.x = x or 420
 	ball.y = y or 420
 	ball.radius = radius or 32
-	ball.vx = 200
+	ball.vx = 400
 	ball.vy = 0
 	ball.yCoef = 1
 	ball.functionX = 0

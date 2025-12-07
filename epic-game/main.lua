@@ -33,6 +33,12 @@ function love.load()
 	local ballXSpawn = (windowWidth / 2) - (ballRadius / 2)
 	local ballYSpawn = (windowHeight / 2) - (ballRadius / 2)
 	Ball = newBall(ballXSpawn, ballYSpawn, ballRadius)
+
+	-- grid
+	local newGrid = require("grid")
+	local gridPixelSpan = 32
+	local gridPadding = 32
+	Grid = newGrid(gridPixelSpan, gridPadding)
 end
 
 function love.update(dt)
@@ -55,7 +61,7 @@ function love.update(dt)
 	elseif GameState == "mathing" then
 		mathOverlay:update(dt)
 		if mathOverlay.submit then
-			local mathFunc = mathOverlay:interpretFunction()
+			local mathFunc = Grid:scaleFunction(mathOverlay:interpretFunction())
 			ShootingPlayer:shoot(Ball, mathFunc)
 			mathOverlay.submit = false
 			GameState = "playing"
@@ -64,10 +70,16 @@ function love.update(dt)
 end
 
 function love.draw()
+	Grid:displayGrid()
 	Player1:draw()
 	Player2:draw()
 	Ball:draw()
 	mathOverlay:displayOverlay()
+	if Ball.ballFunction then
+		utils.previewTrajectory(Ball.ballFunction)
+	end
+
+	utils.showFPS()
 end
 
 function love.textinput(t)
