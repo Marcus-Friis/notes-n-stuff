@@ -16,7 +16,7 @@ local function newBall(x, y, radius)
 
 	function ball:update(dt)
 		ball.x = ball.x + (ball.vx * dt)
-		ball.functionX = ball.functionX + (ball.vx * dt)
+		ball.functionX = ball.functionX + (math.abs(ball.vx) * dt)
 		if ball.ballFunction then
 			ball.y = ball.ballFunction(ball.functionX) * ball.yCoef
 		end
