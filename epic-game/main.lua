@@ -1,15 +1,14 @@
 -- pong men det er matematik funktioner
+mathOverlay = require("mathoverlay")
+mathOverlay:load()
+utils = require("utils")
+BallFunctions = require("functions")
+
+-- game state vars
+GameState = "playing" -- playing|mathing|paused
+ShootingPlayer = nil -- track which player is actively shooting
 
 function love.load()
-	mathOverlay = require("mathoverlay")
-	mathOverlay:load()
-	utils = require("utils")
-	BallFunctions = require("functions")
-
-	-- game state vars
-	GameState = "playing" -- playing|mathing|paused
-	ShootingPlayer = nil -- track which player is actively shooting
-
 	-- window data
 	local windowWidth, windowHeight = love.graphics.getDimensions()
 
@@ -38,7 +37,7 @@ function love.load()
 	local newGrid = require("grid")
 	local gridPixelSpan = 32
 	local gridPadding = 32
-	Grid = newGrid(gridPixelSpan, gridPadding)
+	Grid = newGrid(gridPixelSpan, gridPadding, true)
 end
 
 function love.update(dt)
@@ -54,7 +53,6 @@ function love.update(dt)
 			collisionFlag = collisionFlag or hasCollision
 		end
 		if collisionFlag then
-			print("Hit!")
 			mathOverlay:toggle()
 			GameState = "mathing"
 		end
