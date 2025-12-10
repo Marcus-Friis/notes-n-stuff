@@ -1,10 +1,11 @@
-local function newPlayer(x, y, width, height)
+local function newPlayer(x, y, width, height, name)
 	local player = {}
 	player.x = x or 200
 	player.y = y or 200
 	player.width = width or 100
 	player.height = height or 100
 	player.vy = 0
+	player.name = name -- player name e.g. player1, player2
 
 	function player:update(dt)
 		local speed = 1000

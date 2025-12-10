@@ -22,6 +22,7 @@ local function newGrid(gridPixelSpan, gridPadding)
 
 	function grid:displayGrid()
 		local windowWidth, windowHeight = love.graphics.getDimensions()
+		love.graphics.setColor(1, 1, 1, 0.33)
 
 		local left = self.gridPadding
 		local top = self.gridPadding
@@ -31,20 +32,21 @@ local function newGrid(gridPixelSpan, gridPadding)
 		local gridWidth = right - left
 		local gridHeight = bottom - top
 
-		local numHorizontalLines = math.floor(gridHeight / self.gridPixelSpan)
-		local numVerticalLines = math.floor(gridWidth / self.gridPixelSpan)
+		local numHorizontalLines = math.ceil(gridHeight / self.gridPixelSpan)
+		local numVerticalLines = math.ceil(gridWidth / self.gridPixelSpan)
 
 		-- Horizontal lines
-		for i = 0, numHorizontalLines do
+		for i = 1, numHorizontalLines - 1 do
 			local y = top + i * self.gridPixelSpan
 			love.graphics.line(left, y, right, y)
 		end
 
 		-- Vertical lines
-		for i = 0, numVerticalLines do
+		for i = 1, numVerticalLines - 1 do
 			local x = left + i * self.gridPixelSpan
 			love.graphics.line(x, top, x, bottom)
 		end
+		love.graphics.setColor(1, 1, 1)
 	end
 
 	return grid

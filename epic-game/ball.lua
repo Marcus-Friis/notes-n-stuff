@@ -8,7 +8,7 @@ local function newBall(x, y, radius)
 	ball.yCoef = 1
 	ball.functionX = 0
 	ball.ballFunction = nil
-	local _, windowHeight = love.graphics.getDimensions()
+	local windowWidth, windowHeight = love.graphics.getDimensions()
 
 	function ball:draw()
 		love.graphics.circle("line", ball.x, ball.y, ball.radius)
@@ -16,10 +16,10 @@ local function newBall(x, y, radius)
 
 	function ball:update(dt)
 		ball.x = ball.x + (ball.vx * dt)
+		ball.functionX = ball.functionX + (ball.vx * dt)
 		if ball.ballFunction then
 			ball.y = ball.ballFunction(ball.functionX) * ball.yCoef
 		end
-		ball.functionX = ball.functionX + (ball.vx * dt)
 
 		-- if ball exits game window, do stuff
 		-- bottom boundary
@@ -36,6 +36,13 @@ local function newBall(x, y, radius)
 	end
 
 	function ball:invertXDirection()
+		if self.x > windowWidth / 2 then
+			self.x = windowWidth
+		elseif self.x < windowWidth / 2 then
+			self.x = 0
+		else
+			print("wtf")
+		end
 		self.vx = self.vx * -1
 	end
 

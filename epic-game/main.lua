@@ -24,8 +24,8 @@ function love.load()
 	local playerYSpawn = (windowHeight / 2) - (playerHeight / 2)
 
 	-- init players
-	Player1 = newPlayer(playerPadding, playerYSpawn, playerWidth, playerHeight)
-	Player2 = newPlayer(windowWidth - playerPadding - playerWidth, playerYSpawn, playerWidth, playerHeight)
+	Player1 = newPlayer(playerPadding, playerYSpawn, playerWidth, playerHeight, "player1")
+	Player2 = newPlayer(windowWidth - playerPadding - playerWidth, playerYSpawn, playerWidth, playerHeight, "player2")
 	Players = { Player1, Player2 }
 
 	-- init ball
@@ -37,26 +37,28 @@ function love.load()
 	-- grid
 	local newGrid = require("grid")
 	local gridPixelSpan = 32
-	local gridPadding = 32
+	local gridPadding = 48
 	Grid = newGrid(gridPixelSpan, gridPadding)
+
+	-- shaders
+	Shaders = require("shaders")
 end
 
 function love.update(dt)
-	local collisionFlag = false
 	local hasCollision = false
-
 	if GameState == "playing" then
 		Ball:update(dt)
 		for _, p in ipairs(Players) do
-			p:update(dt)
-			hasCollision = p:ballCollision(Ball)
-			ShootingPlayer = p
-			collisionFlag = collisionFlag or hasCollision
-		end
-		if collisionFlag then
-			print("Hit!")
-			mathOverlay:toggle()
-			GameState = "mathing"
+			if p ~= ShootingPlayer then
+				p:update(dt)
+				hasCollision = p:ballCollision(Ball)
+				if hasCollision then
+					ShootingPlayer = p
+					print("Hit!")
+					mathOverlay:toggle()
+					GameState = "mathing"
+				end
+			end
 		end
 	elseif GameState == "mathing" then
 		mathOverlay:update(dt)
@@ -76,7 +78,8 @@ function love.draw()
 	Ball:draw()
 	mathOverlay:displayOverlay()
 	if Ball.ballFunction then
-		utils.previewTrajectory(Ball.ballFunction)
+		local mirror = ShootingPlayer.name ~= "player1"
+		utils.previewTrajectory(Ball.ballFunction, mirror)
 	end
 
 	utils.showFPS()

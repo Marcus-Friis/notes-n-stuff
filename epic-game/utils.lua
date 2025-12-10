@@ -8,11 +8,29 @@ function utils.getRandomFunction()
 	return list[math.random(#list)]
 end
 
-function utils.previewTrajectory(func)
+function utils.previewTrajectory(func, mirror)
 	local windowWidth, _ = love.graphics.getDimensions()
-	for x = 0, windowWidth, 1 do
-		local y = func(x)
-		love.graphics.circle("line", x, y, 1)
+	windowWidth = math.floor(windowWidth)
+
+	local ys = {}
+	for x = 0, windowWidth do
+		ys[#ys + 1] = func(x)
+	end
+
+	if mirror then
+		for x = 0, windowWidth do
+			local idx = windowWidth - x + 1 -- 1-based index for mirrored x
+			local y = ys[idx]
+			if y then
+				love.graphics.circle("line", x, y, 1)
+			end
+		end
+		return
+	end
+
+	for i = 1, #ys do
+		local x = i - 1
+		love.graphics.circle("line", x, ys[i], 1)
 	end
 end
 
