@@ -9,6 +9,7 @@ local function newBall(x, y, radius)
 	ball.functionX = 0
 	ball.ballFunction = nil
 	local windowWidth, windowHeight = love.graphics.getDimensions()
+	local sound = require("sound")
 
 	function ball:draw()
 		love.graphics.circle("line", ball.x, ball.y, ball.radius)
@@ -49,6 +50,7 @@ local function newBall(x, y, radius)
 	function ball:setFunction(func)
 		ball.ballFunction = func
 		ball.functionX = 0
+		sound.ballHit()
 	end
 
 	return ball

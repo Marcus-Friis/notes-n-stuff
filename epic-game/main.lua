@@ -75,12 +75,12 @@ function love.draw()
 	Grid:displayGrid()
 	Player1:draw()
 	Player2:draw()
-	Ball:draw()
-	mathOverlay:displayOverlay()
 	if Ball.ballFunction then
 		local mirror = ShootingPlayer.name ~= "player1"
 		utils.previewTrajectory(Ball.ballFunction, mirror)
 	end
+	Ball:draw()
+	mathOverlay:displayOverlay()
 
 	utils.showFPS()
 end
